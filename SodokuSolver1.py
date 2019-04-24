@@ -62,7 +62,7 @@ def main():
         #Converts every character into an actual array item
         
     solve()
-    print(board)
+    printBoard()
 
 
 
@@ -113,12 +113,18 @@ def getPossibilities(i,j):
         
     return list(possibilites)
 
-main()
+
 #Clean print function
+def printBoard():
+    global board
+    for row in board:
+        for col in row:
+            print(col, end = "")
+        print("")
 
 
               
-
+main()
         #print(list(line))
         #So printing this returns
         
