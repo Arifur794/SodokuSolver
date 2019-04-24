@@ -41,15 +41,15 @@ proc Solve:
 '''
 
 board =[ 
-        "6..874.1.", 
-         "..9.36...",
-         "...19.8..",
-         "7946.....",
-         "..1.894..",
-         "...41..69",
-         ".7..5..9.",
-         ".539.76..",
-         "9.2.61.47"   ]
+        "........", 
+         "5.3.67...",
+         "9..3421..",
+         ".....4...",
+         "..1...72.",
+         "..2.1....",
+         ".3......9",
+         "8.1..2..",
+         "...75.8.6"   ]
 
 
 
@@ -61,34 +61,52 @@ def main():
         board[idx] = list(line) 
         #Converts every character into an actual array item
         
-        solve()
+    #solve()
+
+    print(getPossibilities(2,2))
 
 
 def solve():
     global board             #nested for loop gives different values of i and j we will use this to check each cell   
     for i in range(0,9):
         for j in range(0,9):
-           possibilites = getPossibilities(i,j) #func checks possibilites in cell with coordinates then return the items back
+            possibilites = getPossibilities(i,j) #func checks possibilites in cell with coordinates then return the items back
             if possibilites == False:
                 continue
-            if len(possibilities) == 1:
+            if len(possibilites) == 1:
                 board[i][j] = possibilites[0]
 
 
 
 def getPossibilities(i,j):
     global board
-    if board[i][j] == ".":
+    if board[i][j] != ".":
         return False
 
                                                       #using {} to create a set
-        possibilites = {str(n) for n in range(1,10)}  #using conveinient python comprehension 
+    possibilites = {str(n) for n in range(1,10)}  #using conveinient python comprehension 
         
-        for val in board[i]:
+    for val in board[i]:
             possibilites -= set(val)  #rows
 
-        for idx in range(0,9):
-            possibilites -= set( board[idx][j] ) #columns
+    for idx in range(0,9):
+        possibilites -= set( board[idx][j] ) #columns
+
+
+        iStart = (i // 3)
+        jStart = (j // 3)
+
+        subboard = board[iStart:iStart+3]
+        for idx,row in enumerate(subboard):
+            subboard[idx] = row[jStart:jStart+3]
+
+        for row in subboard:
+            for col in row:
+                possibilites -= set(col)
+        
+        return list(possibilites)
+
+              
         
         #print(list(line))
         #So printing this returns
