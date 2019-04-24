@@ -84,6 +84,11 @@ def getPossibilities(i,j):
                                                       #using {} to create a set
         possibilites = {str(n) for n in range(1,10)}  #using conveinient python comprehension 
         
+        for val in board[i]:
+            possibilites -= set(val)  #rows
+
+        for idx in range(0,9):
+            possibilites -= set( board[idx][j] ) #columns
         
         #print(list(line))
         #So printing this returns
