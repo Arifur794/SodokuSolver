@@ -41,15 +41,15 @@ proc Solve:
 '''
 
 board =[ 
-        "........", 
-         "5.3.67...",
-         "9..3421..",
-         ".....4...",
-         "..1...72.",
-         "..2.1....",
-         ".3......9",
-         "8.1..2..",
-         "...75.8.6"   ]
+        "6..874.1.", 
+         "..9.36...",
+         "...19.8..",
+         "7946.....",
+         "..1.894..",
+         "...41..69",
+         ".7..5..9.",
+         ".539.76..",
+         "9.2.61.47"   ]
 
 
 
@@ -61,20 +61,27 @@ def main():
         board[idx] = list(line) 
         #Converts every character into an actual array item
         
-    #solve()
+    solve()
+    print(board)
 
-    print(getPossibilities(2,2))
 
 
 def solve():
     global board             #nested for loop gives different values of i and j we will use this to check each cell   
-    for i in range(0,9):
-        for j in range(0,9):
-            possibilites = getPossibilities(i,j) #func checks possibilites in cell with coordinates then return the items back
-            if possibilites == False:
-                continue
-            if len(possibilites) == 1:
-                board[i][j] = possibilites[0]
+    
+    while True:
+        somethingChanged = False
+        for i in range(0,9):
+            for j in range(0,9):
+                possibilites = getPossibilities(i,j) #func checks possibilites in cell with coordinates then return the items back
+                if possibilites == False:
+                    continue
+                if len(possibilites) == 1:
+                    board[i][j] = possibilites[0]
+                    somethingChanged = True
+
+        if somethingChanged == False:
+            return        
 
 
 
@@ -93,25 +100,25 @@ def getPossibilities(i,j):
         possibilites -= set( board[idx][j] ) #columns
 
 
-        iStart = (i // 3)
-        jStart = (j // 3)
+    iStart = (i // 3)
+    jStart = (j // 3)
 
-        subboard = board[iStart:iStart+3]
-        for idx,row in enumerate(subboard):
-            subboard[idx] = row[jStart:jStart+3]
+    subboard = board[iStart:iStart+3]
+    for idx,row in enumerate(subboard):
+        subboard[idx] = row[jStart:jStart+3]
 
-        for row in subboard:
-            for col in row:
-                possibilites -= set(col)
+    for row in subboard:
+        for col in row:
+            possibilites -= set(col)
         
         return list(possibilites)
 
               
-        
+main()
         #print(list(line))
         #So printing this returns
         
-        '''
+''' 
     ['6', '.', '.', '8', '7', '4', '.', '1', '.']
     ['.', '.', '9', '.', '3', '6', '.', '.', '.']
     ['.', '.', '.', '1', '9', '.', '8', '.', '.']
@@ -124,10 +131,5 @@ def getPossibilities(i,j):
 
     We now have lists, allowing us to modify contents
     Main Idea: Convert List of Strings into a Lists of Lists
-       '''
-
-
-
-
-
-main()
+'''
+       
