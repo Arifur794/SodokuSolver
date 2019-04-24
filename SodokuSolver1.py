@@ -1,3 +1,4 @@
+import copy
 #git push 1
 #recursive brute-force approach
 
@@ -67,6 +68,37 @@ def main():
 
 
 def solve():
+    global board
+    
+    try:
+        fillAllObvious()
+    except:  
+        return False  
+    if isComplete():
+        return True
+
+
+    i,j = 0,0
+    for rowIdx,row in enumerate(board):
+        for colIdx,col in enumerate(row):
+            if col == ".":
+                i,j = rowIdx, colIdx
+
+    possibilites = getPossibilities(i,j)
+    for value in possibilites:
+        snapshot = copy.deepcopy(board)
+        
+        board[i][j] = value
+        result = solve()
+        if result == True:
+            return True
+        else:
+            board = copy.deepcopy(snapshot)
+
+    return False       
+    
+    
+def fillAllObvious():
     global board             #nested for loop gives different values of i and j we will use this to check each cell   
     
     while True:
@@ -76,6 +108,8 @@ def solve():
                 possibilites = getPossibilities(i,j) #func checks possibilites in cell with coordinates then return the items back
                 if possibilites == False:
                     continue
+                if len(possibilites) == 0:
+                    raise RuntimeError("NO moves left")
                 if len(possibilites) == 1:
                     board[i][j] = possibilites[0]
                     somethingChanged = True
@@ -123,6 +157,13 @@ def printBoard():
         print("")
 
 
+def isComplete():
+    for row in board:
+        for col in row:
+           if (col == "."):
+                return False 
+
+    return True
               
 main()
         #print(list(line))
