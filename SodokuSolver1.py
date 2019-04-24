@@ -54,10 +54,30 @@ board =[
 
 
 def main():
-    global board #convert every line of text into a list
+    global board #convert every line of text into a list since python strings are immutable
     for idx,line in enumerate(board):
     #gives the index of the current line as well as contents
         board[idx] = list(line) 
         #Converts every character into an actual array item
+        print(list(line))
+        #So printing this returns
         
+        '''
+    ['6', '.', '.', '8', '7', '4', '.', '1', '.']
+    ['.', '.', '9', '.', '3', '6', '.', '.', '.']
+    ['.', '.', '.', '1', '9', '.', '8', '.', '.']
+    ['7', '9', '4', '6', '.', '.', '.', '.', '.']
+    ['.', '.', '1', '.', '8', '9', '4', '.', '.']
+    ['.', '.', '.', '4', '1', '.', '.', '6', '9']
+    ['.', '7', '.', '.', '5', '.', '.', '9', '.']
+    ['.', '5', '3', '9', '.', '7', '6', '.', '.']
+    ['9', '.', '2', '.', '6', '1', '.', '4', '7']
+
+    We now have lists, allowing us to modify contents
+       '''
+
+
+
+
+
 main()
