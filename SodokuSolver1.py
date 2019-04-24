@@ -34,8 +34,8 @@ proc Solve:
     for each possibility in possibilities:
         fill in the possibility at the cell
         recursively run Solve()
-        if it returns, true, return true
-        if it returns falce, undo all changes made
+        if it returns, True, return True
+        if it returns Fasce, undo all changes made
     return false
 
 '''
@@ -68,9 +68,21 @@ def solve():
     global board             #nested for loop gives different values of i and j we will use this to check each cell   
     for i in range(0,9):
         for j in range(0,9):
-            getPossibilities(i,j) #func checks possibilites in cell with coordinates then return the items back
-        
-        
+           possibilites = getPossibilities(i,j) #func checks possibilites in cell with coordinates then return the items back
+            if possibilites == False:
+                continue
+            if len(possibilities) == 1:
+                board[i][j] = possibilites[0]
+
+
+
+def getPossibilities(i,j):
+    global board
+    if board[i][j] == ".":
+        return False
+
+                                                      #using {} to create a set
+        possibilites = {str(n) for n in range(1,10)}  #using conveinient python comprehension 
         
         
         #print(list(line))
