@@ -55,11 +55,25 @@ board =[
 
 def main():
     global board #convert every line of text into a list since python strings are immutable
+   
     for idx,line in enumerate(board):
     #gives the index of the current line as well as contents
         board[idx] = list(line) 
         #Converts every character into an actual array item
-        print(list(line))
+        
+        solve()
+
+
+def solve():
+    global board             #nested for loop gives different values of i and j we will use this to check each cell   
+    for i in range(0,9):
+        for j in range(0,9):
+            getPossibilities(i,j) #func checks possibilites in cell with coordinates then return the items back
+        
+        
+        
+        
+        #print(list(line))
         #So printing this returns
         
         '''
@@ -74,6 +88,7 @@ def main():
     ['9', '.', '2', '.', '6', '1', '.', '4', '7']
 
     We now have lists, allowing us to modify contents
+    Main Idea: Convert List of Strings into a Lists of Lists
        '''
 
 
