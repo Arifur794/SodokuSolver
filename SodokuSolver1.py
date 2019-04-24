@@ -94,15 +94,15 @@ def getPossibilities(i,j):
     possibilites = {str(n) for n in range(1,10)}  #using conveinient python comprehension 
         
     for val in board[i]:
-            possibilites -= set(val)  #rows
+        possibilites -= set(val)  #rows
 
     for idx in range(0,9):
         possibilites -= set( board[idx][j] ) #columns
 
 
-    iStart = (i // 3)
-    jStart = (j // 3)
-
+    iStart = (i // 3) * 3
+    jStart = (j // 3) * 3
+ 
     subboard = board[iStart:iStart+3]
     for idx,row in enumerate(subboard):
         subboard[idx] = row[jStart:jStart+3]
@@ -111,10 +111,14 @@ def getPossibilities(i,j):
         for col in row:
             possibilites -= set(col)
         
-        return list(possibilites)
+    return list(possibilites)
+
+main()
+#Clean print function
+
 
               
-main()
+
         #print(list(line))
         #So printing this returns
         
