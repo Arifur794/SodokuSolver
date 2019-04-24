@@ -40,3 +40,24 @@ proc Solve:
 
 '''
 
+board =[ 
+        "6..874.1.", 
+         "..9.36...",
+         "...19.8..",
+         "7946.....",
+         "..1.894..",
+         "...41..69",
+         ".7..5..9.",
+         ".539.76..",
+         "9.2.61.47"   ]
+
+
+
+def main():
+    global board #convert every line of text into a list
+    for idx,line in enumerate(board):
+    #gives the index of the current line as well as contents
+        board[idx] = list(line) 
+        #Converts every character into an actual array item
+        
+main()
